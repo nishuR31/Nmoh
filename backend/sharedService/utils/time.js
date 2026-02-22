@@ -1,4 +1,4 @@
-import handler from './handler.js';
+import handler from "./handler.js";
 
 let time = (amt, unit) =>
   handler(() => {
@@ -13,7 +13,9 @@ let time = (amt, unit) =>
       d: 1000 * 60 * 60 * 24,
       day: 1000 * 60 * 60 * 24,
     };
-    if (!base[unit]) throw new Error('Invalid unit: ' + unit);
+
+    if (!base[unit]) throw new Error(`Invalid unit: ${unit}`);
+
     return +amt * base[unit.toLowerCase()];
   });
 

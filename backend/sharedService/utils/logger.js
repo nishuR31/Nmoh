@@ -1,6 +1,6 @@
-import winston from 'winston';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import winston from "winston";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,39 +14,51 @@ const levels = {
 };
 
 const colors = {
-  error: 'red',
-  warn: 'yellow',
-  info: 'green',
-  http: 'magenta',
-  debug: 'white',
+  error: "red",
+  warn: "yellow",
+  info: "green",
+  http: "magenta",
+  debug: "white",
 };
 
 winston.addColors(colors);
 
 const format = winston.format.combine(
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss:ms" }),
   winston.format.colorize({ all: true }),
-  winston.format.printf((info) => info.timestamp + ' ' + info.level + ': ' + info.message),
+  winston.format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`),
 );
 
 const transports = [new winston.transports.Console()];
 
-if (process.env.MODE === 'production') {
+if (process.env.MODE === "production") {
   transports.push(
     new winston.transports.File({
-      filename: path.join(__dirname, '../../../logs/error.log'),
-      level: 'error',
+      filename: path.join(__dirname, "../../../logs/error.log"),
+      level: "error",
       maxsize: 5242880,
       maxFiles: 5,
-    })
+    }),
+    new winston.transports.File({
+      filename: path.join(__dirname, "../../../logs/combined.log"),
+      maxsize: 5242880,
+      maxFiles: 5,
+    }),
   );
 }
 
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'debug',
+  level: process.env.LOG_LEVEL || (process.env.MODE === "development" ? "debug" : "http"),
   levels,
   format,
   transports,
+  exitOnError: false,
 });
+
+logger.stream = {
+  write: (message) => {
+    logger.http(message.trim());
+  },
+};
 
 export default logger;
