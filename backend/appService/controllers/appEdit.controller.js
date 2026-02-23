@@ -4,34 +4,30 @@ import asyncHandler from "../../sharedService/utils/asyncHandler.js";
 import codes from "../../sharedService/utils/codes.js";
 import appService from "../services/appService.js";
 import { imgbbUploader } from "../../sharedService/upload/upload.js";
-import appPasswordSchema from "../validators/appPassword.schema.js";
+import  appPasswordSchema  from "../validators/appPassword.schema.js";
+import  appEditSchema  from "../validators/appEdit.schema.js";
 import userClient from "../config/prisma.js";
 import bcrypt from "bcrypt";
-import Joi from "joi";
-
-// basic schema allowing arbitrary fields, adjust as needed
-const appEditSchema = Joi.object({
-  username: Joi.string().optional(),
-  email: Joi.string().email().optional(),
-  name: Joi.string().allow("", null).optional(),
-  url: Joi.string().uri().allow("", null).optional(),
-}).unknown(true);
 
 let appEdit = asyncHandler(async (req, res, next) => {
-  let payload = await appEditSchema.validateAsync(req.body, {
-    abortEarly: false,
-    stripUnknown: true,
-  });
+  let payload;
+  try {
+    payload = appEditSchema.parse(req.body);
+  } catch (e) {
+    return err(res, "Validation error", codes.badRequest, e.errors || e);
+  }
 
   const { currentPassword, newPassword, confirmPassword } = req.body || {};
   const wantsPasswordChange =
     Boolean(currentPassword) || Boolean(newPassword) || Boolean(confirmPassword);
 
   if (wantsPasswordChange) {
-    const passwordPayload = await appPasswordSchema.validateAsync(
-      { currentPassword, newPassword, confirmPassword },
-      { abortEarly: false, stripUnknown: true, context: { isReset: false } },
-    );
+    let passwordPayload;
+    try {
+      passwordPayload = appPasswordSchema.parse({ currentPassword, newPassword, confirmPassword });
+    } catch (e) {
+      return err(res, "Password validation error", codes.badRequest, e.errors || e);
+    }
 
     const user = await userClient.user.findUnique({ where: { id: req.user.id } });
     if (!user) {

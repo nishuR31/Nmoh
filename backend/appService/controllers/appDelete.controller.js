@@ -2,14 +2,16 @@ import success from "../../sharedService/response/success.js";
 import asyncHandler from "../../sharedService/utils/asyncHandler.js";
 import codes from "../../sharedService/utils/codes.js";
 import appService from "../services/appService.js";
-import appFindSchema from "../validators/appFind.schema.js";
+import appFindSchema  from "../validators/appFind.schema.js";
 
 const appDelete = asyncHandler(async (req, res) => {
   // Allow deleting self or arbitrary id (admin usage). Ensure auth middleware handles permissions.
-  const payload = await appFindSchema.validateAsync(req.params, {
-    abortEarly: false,
-    stripUnknown: true,
-  });
+  let payload;
+  try {
+    payload = appFindSchema.parse(req.params);
+  } catch (e) {
+    return next(err(res, "Validation error", codes.badRequest, e.errors || e));
+  }
 
   const result = await appService.delete(payload.id);
 

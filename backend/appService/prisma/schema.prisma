@@ -12,7 +12,6 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("USER_DB")
 }
 
 model User {
@@ -40,8 +39,8 @@ model User {
 }
 
 model PendingRegistration {
-  email             String   @id
-  username          String
+  email             String   @id @default(auto()) @map("_id") @db.ObjectId
+  username          String 
   otp               String
   otpExpiry         DateTime
   superadminOtp     String?

@@ -1,27 +1,26 @@
-import Joi from "joi";
+import { z } from "zod";
 
-const appRegisterSchema = Joi.object({
-  username: Joi.string().trim().min(3).max(100).lowercase().required().messages({
-    "string.min": "Username must be at least 3 characters long",
-    "string.max": "Username must not exceed 100 characters",
-    "any.required": "Username is required",
-  }),
-
-  email: Joi.string().trim().email().required().messages({
-    "string.email": "Please provide a valid email address",
-    "any.required": "Email is required",
-  }),
-
-  password: Joi.string().trim().min(6).required().messages({
-    "string.min": "Password must be at least 6 characters long",
-    "any.required": "Password is required",
-  }),
-
-  name: Joi.string().trim().min(2).max(100).optional(),
-
-  contact: Joi.string().trim().optional().allow("", null),
-
-  url: Joi.string().uri().optional().allow("", null),
+const appRegisterSchema = z.object({
+  username: z
+    .string()
+    .min(3, { message: "Username must be at least 3 characters long" })
+    .max(100, { message: "Username must not exceed 100 characters" })
+    .toLowerCase()
+    .trim()
+    .nonempty({ message: "Username is required" }),
+  email: z
+    .string()
+    .email({ message: "Please provide a valid email address" })
+    .trim()
+    .nonempty({ message: "Email is required" }),
+  password: z
+    .string()
+    .min(6, { message: "Password must be at least 6 characters long" })
+    .trim()
+    .nonempty({ message: "Password is required" }),
+  name: z.string().min(2).max(100).optional(),
+  contact: z.string().optional().nullable(),
+  url: z.url().string().optional().nullable(),
 });
 
 export default appRegisterSchema;

@@ -1,0 +1,20 @@
+{
+  "name": "dataservice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nodemon index.js",
+    "start": "node index.js",
+    "prisma:generate": "npx prisma generate --schema=prisma/schema.prisma",
+    "prisma:push": "npx prisma db push --schema=prisma/schema.prisma",
+    "prisma": "npm run prisma:generate && npm run prisma:push"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "@prisma/client": "^7.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -4,7 +4,7 @@ import codes from "../../sharedService/utils/codes.js";
 import appService from "../services/appService.js";
 import err from "../../sharedService/response/error.js";
 import { tokens } from "../../sharedService/utils/jwt.js";
-import appLoginSchema from "../validators/appLogin.schema.js";
+import  appLoginSchema from "../validators/appLogin.schema.js";
 import cookieOptions from "../../sharedService/utils/cookieOptions.js";
 import userClient from "../config/prisma.js";
 
@@ -15,10 +15,12 @@ let appLogin = asyncHandler(async (req, res, next) => {
 
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
 
-  let payload = await appLoginSchema.validateAsync(req.body, {
-    abortEarly: false,
-    stripUnknown: true,
-  });
+  let payload;
+  try {
+    payload = appLoginSchema.parse(req.body);
+  } catch (e) {
+    return next(err(res, "Validation error", codes.badRequest, e.errors || e));
+  }
   let user = await appService.login(payload);
   let { accessToken, refreshToken } = tokens({
     id: user.id,

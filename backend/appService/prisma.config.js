@@ -1,22 +1,12 @@
-import { config } from "dotenv";
-import { defineConfig, env } from "prisma/config";
-import path from "path";
-import { fileURLToPath } from "url";
+import { defineConfig } from "prisma/config";
+import dotenv from "dotenv";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// config({
-//   path: path.join(__dirname, "app.env"),
-// });
-config({ path: path.join(__dirname, "..", "back.env") });
+dotenv.config({ path: "../../backend/.env" });
 
 export default defineConfig({
-  schema: "prisma/schema.prisma",
-  migrations: {
-    path: "prisma/migrations",
-  },
-  engine: "classic",
+  schema: "./prisma/schema.prisma",
   datasource: {
-    url: env("USER_DB"),
-  },
+    provider: "mongodb",
+    url: process.env.USER_DB
+  }
 });

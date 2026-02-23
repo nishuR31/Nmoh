@@ -1,3 +1,4 @@
+import appRepository from "../repo/appRepository.js";
 const appService = {
   changeRole: handler(async (args) => appRepository.changeRole(args)),
   disable2fa: handler(async (id) => appRepository.disable2fa(id)),

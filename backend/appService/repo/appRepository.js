@@ -1,5 +1,5 @@
 import userClient from "../config/prisma.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import handler from "../../sharedService/utils/handler.js";
 import { MAIL_QUEUE, jobTypes } from "../../sharedService/queue/queue.js";
 import speakeasy from "speakeasy";

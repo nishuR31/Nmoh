@@ -1,10 +1,8 @@
 import "./sharedService/config/env.js";
-import menuService from "./menuService/index.js";
+// import dataService from "./dataService/index.js";
 import appService from "./appService/index.js";
-import eventService from "./eventService/index.js";
 import red from "./sharedService/config/redis.js";
-import offerService from "./offerService/index.js";
-import gateway from "./gateway/index.js";
+import gateway from "./gatewayService/index.js";
 
 async function start() {
   // Wait for Redis to be ready
@@ -19,9 +17,6 @@ async function start() {
   // Start all services
   gateway();
   appService();
-  eventService();
-  menuService();
-  offerService();
 }
 
 await start();

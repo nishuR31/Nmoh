@@ -1,7 +1,7 @@
 import { PrismaClient } from "../generated/prisma/index.js";
 
 const userClient = new PrismaClient({
-  log: ["error", "warn"],
+  accelerateUrl: process.env.USER_DB,
 });
 
 // Test connection and handle initialization errors

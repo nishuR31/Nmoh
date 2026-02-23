@@ -1,11 +1,10 @@
-import Joi from "joi";
+import { z } from "zod";
 
-const appFindSchema = Joi.object({
-  id: Joi.string().trim().length(24).hex().required().messages({
-    "string.length": "Invalid ID format.",
-    "string.hex": "ID must be a valid Mongo ObjectId.",
-    "any.required": "ID is required to find the user.",
-  }),
+ const appFindSchema = z.object({
+  id: z
+    .string()
+    .length(24, { message: "Invalid ID format." })
+    .regex(/^[a-fA-F0-9]{24}$/, { message: "ID must be a valid Mongo ObjectId." })
+    .nonempty({ message: "ID is required to find the user." }),
 });
-
-export default appFindSchema;
+export default appFindSchema

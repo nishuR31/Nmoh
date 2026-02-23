@@ -1,30 +1,9 @@
-import Joi from "joi";
+import { z } from "zod";
 
-const appAddSchema = Joi.object({
-  username: Joi.string().trim().min(3).max(100).lowercase().required(),
-
-  name: Joi.string().trim().min(3).max(100).optional(),
-
-  password: Joi.string().trim().required(),
-
-  email: Joi.string().trim().email().required(),
-
-  contact: Joi.string().trim().optional().allow("", null),
-
-  verified: Joi.boolean().optional(),
-
-  url: Joi.string().uri().optional().allow("", null),
-
-  otp: Joi.string().optional().allow(null),
-  otpExpiresAt: Joi.date().optional().allow(null),
-
-  verifiedOtp: Joi.boolean().optional().default(false),
-
-  blocked: Joi.boolean().optional().default(false),
-
-  loginAttempt: Joi.number().integer().default(0).optional(),
-
-  refreshToken: Joi.string().optional().default(null),
+ const appEditSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  contact: z.string().optional().nullable(),
+  url: z.string().url().optional().nullable(),
 });
 
-export default appAddSchema;
+export default appEditSchema
