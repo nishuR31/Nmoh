@@ -1,4 +1,4 @@
-import userClient from "../src/prisma.js";
+import userClient from "../config/prisma.js";
 import bcrypt from "bcrypt";
 import handler from "../../sharedService/utils/handler.js";
 import { MAIL_QUEUE, jobTypes } from "../../sharedService/queue/queue.js";

@@ -6,7 +6,7 @@ import success from "../../sharedService/response/success.js";
 import cookieOptions from "../../sharedService/utils/cookieOptions.js";
 import { sendMail } from "../../sharedService/mail/transporter.js";
 import appService from "../services/appService.js";
-import userClient from "../src/prisma.js";
+import userClient from "../config/prisma.js";
 // ==================== VERIFY PASSLESS TOKEN ====================
 /**
  * Verify passless token from email link

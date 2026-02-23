@@ -3,7 +3,7 @@ import asyncHandler from "../../sharedService/utils/asyncHandler.js";
 import codes from "../../sharedService/utils/codes.js";
 // import appService from "../services/appService.js";
 import err from "../../sharedService/response/error.js";
-import userClient from "../src/prisma.js";
+import userClient from "../config/prisma.js";
 import cookieOptions from "../../sharedService/utils/cookieOptions.js";
 
 const appLogout = asyncHandler(async (req, res) => {

@@ -1,35 +1,54 @@
+// Categorized by controller file
+// appPing.controller.js
+// appMail.controller.js
+// appForgot.controller.js
+// appResetPassword.controller.js
+// appCheckOtp.controller.js
+// appSendRegOtp.controller.js
+// appRegister.controller.js
+// appVerifyRegister.controller.js
+// appLogin.controller.js
+// appPassless.controller.js
+
 export default function isPublic(path) {
   return (
-    path.endsWith("/ping") ||
-    path.endsWith("/fetch") ||
-    path.endsWith("/mail") ||
-    path.endsWith("/carousel") ||
-    path.endsWith("/snapshots") ||
-    path.endsWith("/status") ||
-    path.endsWith("/forgot") ||
-    path.endsWith("/reset-password") ||
+    path.endsWith("/ping") || // appPing
+    path.endsWith("/mail") || // appMail
+    path.endsWith("/forgot") || // appForgot
+    path.endsWith("/reset-password") || // appResetPassword
+    path.endsWith("/check-otp") || // appCheckOtp
+    path.endsWith("/register/send-otp") || // appSendRegOtp
+    path.endsWith("/register") || // appRegister
+    path.endsWith("/register/verify") || // appVerifyRegister
+    path.endsWith("/login") || // appLogin
+    path.endsWith("/auth/passless") || // appPassless
     path.includes("/ping") ||
-    path.includes("/fetch") ||
     path.includes("/mail") ||
-    path.includes("/carousel") ||
-    path.includes("/check-otp") ||
     path.includes("/forgot") ||
     path.includes("/reset-password") ||
-    path.includes("/snapshots") ||
-    path.includes("/store/status") ||
-    (path.includes("/app") && path.includes("/carousel"))
+    path.includes("/check-otp") ||
+    path.includes("/register/send-otp") ||
+    path.includes("/register") ||
+    path.includes("/register/verify") ||
+    path.includes("/login") ||
+    path.includes("/auth/passless")
   );
 }
 
+// Categorized by controller file
+// appLogin.controller.js
+// appRegister.controller.js
+// appForgot.controller.js
+// appLogout.controller.js
+// appPassless.controller.js
+
 export function isUnauthenticatedRoute(path) {
-  // Routes that don't require an existing token (login, register, forgot password, etc)
-  // but may require validation at the service level
   return (
-    path.endsWith("/login") ||
-    path.endsWith("/register") ||
-    path.endsWith("/forgot") ||
-    path.endsWith("/logout") ||
-    path.endsWith("/passless") ||
+    path.endsWith("/login") || // appLogin
+    path.endsWith("/register") || // appRegister
+    path.endsWith("/forgot") || // appForgot
+    path.endsWith("/logout") || // appLogout
+    path.endsWith("/auth/passless") || // appPassless
     path.includes("/login") ||
     path.includes("/register") ||
     path.includes("/forgot") ||

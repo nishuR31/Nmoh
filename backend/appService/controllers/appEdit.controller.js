@@ -5,7 +5,7 @@ import codes from "../../sharedService/utils/codes.js";
 import appService from "../services/appService.js";
 import { imgbbUploader } from "../../sharedService/upload/upload.js";
 import appPasswordSchema from "../validators/appPassword.schema.js";
-import userClient from "../src/prisma.js";
+import userClient from "../config/prisma.js";
 import bcrypt from "bcrypt";
 import Joi from "joi";
 

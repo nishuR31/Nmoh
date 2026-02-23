@@ -28,8 +28,10 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
     "prettier": "prettier --write .",
-    "auth": "node appService/auth/index.js",
-    "gateway": "node appService/gateway/index.js",
+    "auth": "node appService/index.js",
+    "app": "node authService/index.js",
+    "data": "node dataService/index.js",
+    "gateway": "node gatewayService/index.js",
     "test": "jest",
     "lint": "eslint ."
   }

@@ -6,7 +6,7 @@ import err from "../../sharedService/response/error.js";
 import { tokens } from "../../sharedService/utils/jwt.js";
 import appLoginSchema from "../validators/appLogin.schema.js";
 import cookieOptions from "../../sharedService/utils/cookieOptions.js";
-import userClient from "../src/prisma.js";
+import userClient from "../config/prisma.js";
 
 let appLogin = asyncHandler(async (req, res, next) => {
   if (req.user?.id) {

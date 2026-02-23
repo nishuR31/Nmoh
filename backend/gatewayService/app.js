@@ -28,7 +28,6 @@ const allowedOrigins = [
   process.env.FRONTEND_URL_PROD,
   process.env.FRONTEND_URL_DEV,
   "http://localhost:5173",
-  "https://scafeakasahu.vercel.app",
 ];
 
 app.use(
