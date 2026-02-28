@@ -14,5 +14,5 @@ import gateway from "./gatewayService/index.js";
   gateway();
   appService();
   dataService()
-  console.log("Gateway|")
+  console.log("Gateway|Data|App fired up")
 })()
