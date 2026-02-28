@@ -4,10 +4,10 @@ import cors from "cors";
 import success from "../../sharedService/response/success.js";
 import err from "../../sharedService/response/error.js";
 import codes from "../../sharedService/utils/codes.js";
-import eventRouter from "../routes/event.route.js";
+// import dataRouter from "../routes/event.route.js";
 
 const baseRoute = process.env.BASE;
-const service = `${baseRoute}/event`;
+const service = `${baseRoute}/data`;
 const app = express();
 
 const allowedOrigins = [
@@ -15,7 +15,6 @@ const allowedOrigins = [
   process.env.FRONTEND_URL_PROD,
   process.env.FRONTEND_URL_DEV,
   "http://localhost:5173",
-  "https://scafeakasahu.vercel.app",
 ].filter(Boolean);
 
 app.use(
@@ -39,17 +38,17 @@ app.use(
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-app.use(service, eventRouter);
+// app.use(service, dataRouter);
 
 app.get("/", (req, res) =>
   success(res, "Root route", codes.ok, {
-    msg: "Hello from event service",
+    msg: "Hello from data service",
   }),
 );
 
 app.get(`${service}`, (req, res) =>
   success(res, `${service} route fetched`, codes.ok, {
-    msg: "Hello from event route",
+    msg: "Hello from data route",
   }),
 );
 

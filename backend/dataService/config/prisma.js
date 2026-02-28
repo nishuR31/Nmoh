@@ -1,16 +1,16 @@
 import { PrismaClient } from "../generated/prisma/index.js";
 
-const eventClient = new PrismaClient();
+const dataClient = new PrismaClient();
 
 // Handle graceful shutdown
 process.on("SIGINT", async () => {
-  await eventClient.$disconnect();
+  await dataClient.$disconnect();
   process.exit(0);
 });
 
 process.on("SIGTERM", async () => {
-  await eventClient.$disconnect();
+  await dataClient.$disconnect();
   process.exit(0);
 });
 
-export default eventClient;
+export default dataClient;

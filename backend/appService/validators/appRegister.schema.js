@@ -20,7 +20,7 @@ const appRegisterSchema = z.object({
     .nonempty({ message: "Password is required" }),
   name: z.string().min(2).max(100).optional(),
   contact: z.string().optional().nullable(),
-  url: z.url().string().optional().nullable(),
+  url: z.string().url().optional().nullable(),
 });
 
 export default appRegisterSchema;

@@ -14,4 +14,4 @@ export default function appService() {
   })();
 }
 
-await appService();
+// await appService();

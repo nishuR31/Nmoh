@@ -153,7 +153,7 @@ const appRepository = {
     const superadmins = await userClient.user.findMany({ where: { role: "SUPERADMIN" }, take: 3 });
     if (superadmins.length && superadmins.length === 3) {
       if (role === "SUPERADMIN") {
-        throw new Error("Already superadmins exists, cannot promote/add to that role");
+        throw new Error("Enough Superadmins exists, cannot promote/add to that role");
       }
     }
     let valid = false;

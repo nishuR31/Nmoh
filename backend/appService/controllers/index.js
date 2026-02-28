@@ -17,6 +17,8 @@ import { verifyPasslessLink, sendPasslessLink } from "./appPassless.controller.j
 import appTotpLogin from "./appTotpLogin.controller.js";
 import { setup2FA, verify2FA } from "./app2fa.controller.js";
 import disable2fa from "./disable2fa.controller.js";
+import approveAdminRegistration from "./appApproveAdminRegistration.js";
+import appRole from "./appRole.js";
 
 export default {
   appPing,
@@ -37,9 +39,11 @@ export default {
   sendPasslessLink,
   appSendRegOtp,
   appVerifyRegister,
-  appPasskey,
   appTotpLogin,
   setup2FA,
   verify2FA,
   disable2fa,
+  approveAdminRegistration,
+  appRole,
+  appRole,
 };

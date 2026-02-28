@@ -11,4 +11,4 @@ export default function gatewayService() {
   })();
 }
 
-await gatewayService();
+// await gatewayService();
