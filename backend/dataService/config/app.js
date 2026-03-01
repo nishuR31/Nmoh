@@ -4,7 +4,8 @@ import cors from "cors";
 import success from "../../sharedService/response/success.js";
 import err from "../../sharedService/response/error.js";
 import codes from "../../sharedService/utils/codes.js";
-// import dataRouter from "../routes/event.route.js";
+import eventRouter from "../routes/event.route.js";
+import repoRouter from "../routes/repo.route.js";
 
 const baseRoute = process.env.BASE;
 const service = `${baseRoute}/data`;
@@ -38,7 +39,11 @@ app.use(
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-// app.use(service, dataRouter);
+
+// Event routes
+app.use(`${service}/event`, eventRouter);
+// Repo routes
+app.use(`${service}/repo`, repoRouter);
 
 app.get("/", (req, res) =>
   success(res, "Root route", codes.ok, {

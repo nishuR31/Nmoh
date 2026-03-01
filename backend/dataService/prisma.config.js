@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // config({
 //   path: path.join(__dirname, "event.env"),
 // });
-config({ path: path.join(__dirname, "..", "back.env") });
+config({ path: path.join(__dirname, "..", ".env") });
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
@@ -17,6 +17,6 @@ export default defineConfig({
   },
   engine: "classic",
   datasource: {
-    url: env("EVENT_DB"),
+    url: env("DATA_DB"),
   },
 });
